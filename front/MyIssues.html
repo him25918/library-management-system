@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Issued Books Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>My Issued Books</h2>
+        <input type="text" id="studentId" placeholder="Enter Student ID">
+        <button onclick="fetchIssuedBooks()">Get Issued Books</button>
+        <div id="error-message" class="error"></div>
+        
+        <table id="booksTable" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Book Id</th>
+                    <th>Book Name</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody id="booksTableBody">
+                <!-- Table rows will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function fetchIssuedBooks() {
+            const studentId = document.getElementById("studentId").value;
+            const errorMessage = document.getElementById("error-message");
+            const table = document.getElementById("booksTable");
+            const tableBody = document.getElementById("booksTableBody");
+
+            // Clear previous error messages and table content
+            errorMessage.textContent = "";
+            tableBody.innerHTML = "";
+            table.style.display = "none";
+
+            // Check if student ID is entered
+            if (!studentId) {
+                errorMessage.textContent = "Please enter a Student ID.";
+                return;
+            }
+
+            try {
+                // Fetch data from backend API using studentId as a query parameter
+                const response = await fetch(`http://localhost:8080/lib/my-issues?studentId=${studentId}`);
+                if (!response.ok) throw new Error("Failed to fetch data. Please try again.");
+
+                const books = await response.json();
+
+                // Check if any books are issued
+                if (books.length === 0) {
+                    errorMessage.textContent = "No books issued for this Student ID.";
+                    return;
+                }
+
+                // Populate the table with book data
+                books.forEach(book => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${book.bookId}</td>
+                        <td>${book.bookName}</td>
+                        <td>${book.issueDate}</td>
+                        <td>${book.returnDate}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                // Display the table
+                table.style.display = "table";
+            } catch (error) {
+                errorMessage.textContent = "An error occurred while fetching data.";
+                console.error("Error:", error);
+            }
+        }
+    </script>
+
+</body>
+</html>
+

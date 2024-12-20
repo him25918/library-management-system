@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="common.css">
+<link rel="stylesheet" href="style1.css">
+<body>
+    <header>
+        <h1>Library Management System</h1>
+        <nav>
+            <button onclick="window.location.href='main.html'">Home</button>
+            <button onclick="window.location.href='book.html'">Add Book</button>
+            <button onclick="window.location.href='std.html'">Add Member</button>
+            <button onclick="window.location.href='allbooks.html'">View All Books</button>
+            <button onclick="window.location.href='allmem.html'">View All Members</button>
+            <button onclick="window.location.href='issue.html'">Issue Book</button>
+            <button onclick="window.location.href='return.html'">Return Book</button>
+            <button onclick="window.location.href='search.html'">Search</button>
+            <button onclick="window.location.href='issued.html'">All issued Books</button>
+        </nav>
+    </header>
+    <h1>List of Members</h1>
+
+    <div id="loader" class="loader"></div>
+
+    <table class="member-table">
+        <thead>
+            <tr>
+                <th>Student Id</th>
+                <th>Student Name</th>
+                <th>City</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="memTable">
+            
+        </tbody>
+    </table>
+    <script src="viewMem.js"></script>
+</body>
+</html>

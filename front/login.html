@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <form id="loginForm">
+        <h2>Login</h2>
+
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+        <!-- <div>Don't have an account? <a href="/register.html">Register here</a></div> -->
+        <p>Don't have an account? &nbsp &nbsp &nbsp &nbsp <a href="/register.html">Register here</a></p>
+
+        <p id="loginMessage"></p> <!-- Message will be displayed here -->
+    </form>
+
+    <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Create login data object
+        const loginData = {
+            userId: document.getElementById("userId").value,
+            password: document.getElementById("password").value
+        };
+
+        // Send a POST request to the login API
+        fetch('http://localhost:8080/auth/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(loginData)
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.text();  // Expect plain text response
+            } else {
+                throw new Error("Invalid userId or password");
+            }
+        })
+        .then(data => {
+            document.getElementById("loginMessage").innerText = data;  // Show the success message
+             window.location.href = "/subMain.html";
+        })
+        .catch(error => {
+            document.getElementById("loginMessage").innerText = "Error: " + error.message;
+        });
+    });
+</script>
+
+
+    <!-- <div>Don't have an account? <a href="/register.html">Register here</a></div> -->
+</body>
+</html>
+

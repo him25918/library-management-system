@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Issued Books</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <header>
+        <h1>Library Management System</h1>
+        <nav>
+            <button onclick="window.location.href='main.html'">Home</button>
+            <button onclick="window.location.href='book.html'">Add Book</button>
+            <button onclick="window.location.href='std.html'">Add Member</button>
+            <button onclick="window.location.href='allbooks.html'">View All Books</button>
+            <button onclick="window.location.href='allmem.html'">View All Members</button>
+            <button onclick="window.location.href='issue.html'">Issue Book</button>
+            <button onclick="window.location.href='return.html'">Return Book</button>
+            <button onclick="window.location.href='search.html'">Search</button>
+            <button onclick="window.location.href='issued.html'">All issued books</button>
+        </nav>
+    </header>
+    <h1>List of Issued Books</h1>
+
+
+    <div id="loader" class="loader"></div>
+
+   
+    <table class="book-table">
+        <thead>
+            <tr>
+                <th>Book Id</th>
+                <th>Book Name</th>
+                <th>Student Id</th>
+                <th>Student Name</th>
+                <th>Issue Date</th>
+                <th>return Date</th>
+            </tr>
+        </thead>
+        <tbody id="bookTable">
+           
+        </tbody>
+    </table>
+
+    <script src="allissues.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <section class="sec">
+        <div class="log_img">
+        
+            <div class="box1">
+                <h1>Library Management System</h1>
+                
+                <h1 class="user">User Login Form</h1>
+                <form id="myForm">
+                    <br>
+                    <div class="login">
+                        <input type="text" name="username" id="user" placeholder="Username" class="hove"> <br><br>
+                        <input type="password" name="password" id="pass" placeholder="Password" class="hove"><br><br>
+                        <button onclick="login()" class="button" id="btn">Login</button>
+                    </div>
+                </form>
+                <div class="error-message" id="error-message"></div>
+            </div>
+        </div>
+    </section>
+    <script src="login.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+body {
+    background-image: url("images/3.jpg");
+    background-size: cover;
+}
+h1 {
+    text-align: center;
+    font-size: 35px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+}
+.user {
+    font-size: 25px;
+}
+p {
+    color: white;
+    margin-left: 20px;
+}
+.sec {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.error-message {
+    color: red;
+    font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
+    z-index: 2;
+}
+.login {
+    margin-left: 120px;
+    /* display: flex;
+    flex-direction: column; */
+}
+.log_img {
+    height: 450px;
+    width: 400px;
+    background: rgba(0,0,0,0.5);
+    position: relative;
+    top: 20px;
+}
+p a {
+    color: white;
+}
+.anch:hover  {
+    font-weight: 700;
+    color: #2e69ff;
+}
+.hove:hover {
+    box-shadow: 2px 2px rgba(0,0,0,0.5);
+}
+.button:hover {
+    background-color: #2e69ff;
+    color: white;
+    box-shadow: 2px 2px rgba(0,0,0,0.5);
+}
+.lab1{
+    color: white;
+}

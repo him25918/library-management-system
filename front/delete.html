@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            display: none; /* Initially hidden */
+        }
+
+        /* Success message styling */
+        .success-message {
+            color: green;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+</style>
+<body>
+    <form id="myForm">
+        <div class="form-group">
+                <label for="bookId">Book ID:</label>
+                <input type="text" id="bookId" placeholder="Enter book ID">
+         </div>
+         <input type="submit" value="delete Book">
+    </form>
+    <div class="error-message" id="error-message">Please enter is correctly!</div>
+    <div class="success-message" id="success-message">Book deleted successfully!</div>
+    <script src="del.js"></script>
+</body>
+</html>

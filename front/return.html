@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .details {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #e9ecef;
+        }
+
+        .details p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Return Book</h1>
+
+    <div class="form-group">
+        <label for="bookId">Book ID:</label>
+        <input type="text" id="bookId" placeholder="Enter book ID">
+    </div>
+
+    <button onclick="returnBook()">Return Book</button>
+
+    <div class="message" id="message"></div>
+
+    <div class="details" id="details" style="display: none;">
+        <h3>Returned Book Details</h3>
+        <p><strong>Book Title:</strong> <span id="bookTitle"></span></p>
+        <p><strong>Student Name:</strong> <span id="studentName"></span></p>
+        <p><strong>Issue Date:</strong> <span id="issueDate"></span></p>
+        <p><strong>Return Date:</strong> <span id="returnDate"></span></p>
+        <p><strong>Fine:</strong> ₹<span id="fine"></span></p>
+    </div>
+</div>
+
+<script>
+    function returnBook() {
+        const bookId = document.getElementById("bookId").value;
+        const messageElement = document.getElementById("message");
+        const detailsElement = document.getElementById("details");
+
+        if (!bookId) {
+            messageElement.innerHTML = "Book ID is required!";
+            messageElement.classList.add("error");
+            return;
+        }
+
+        fetch("http://localhost:8080/lib/return-book?bookId=" + bookId, {
+            method: "POST"
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.bookTitle) {
+                messageElement.innerHTML = "Book returned successfully!";
+                messageElement.classList.remove("error");
+                messageElement.classList.add("success");
+
+                // Display the details of the returned book
+                document.getElementById("bookTitle").innerText = data.bookTitle;
+                document.getElementById("studentName").innerText = data.studentName;
+                document.getElementById("issueDate").innerText = data.issueDate;
+                document.getElementById("returnDate").innerText = data.returnDate;
+                document.getElementById("fine").innerText = data.fine;
+
+                detailsElement.style.display = "block";
+            } else {
+                messageElement.innerHTML = "Failed to return book.";
+                messageElement.classList.add("error");
+                detailsElement.style.display = "none";
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            messageElement.innerHTML = "An error occurred while returning the book.";
+            messageElement.classList.add("error");
+        });
+    }
+</script>
+
+</body>
+</html>
